@@ -1,0 +1,11 @@
+O arquivo mpfuncs.c contem as funcoes que voce podera utilizar em seu
+codigo. Verifique em tstMaosPoquer.c exemplos de utilizacao destas funcoes.
+
+Para compilar o codigo de exemplo, se estiver utilizando o gcc, use o comando:
+gcc -ansi tstMaosPoquer.c mpfuncs.c -o tstMaosPoquer
+
+Se estiver usando uma IDE, como o Code Blocks, inclua o mpfuncs.c e
+o arquivo maosPoquer.h em seu projeto.
+
+Qualquer duvida, entre em contato.
+Bom trabalho!
