@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "maosPoquer.h"
-#include "mpfuncs.c"
 
 #define CARTAS_POR_MAO 5
 #define CARTAS_PESCA 30
+int pontos = 0;
 
 // Definindo a lista encadeada para pilha de descarte e mãos
 typedef struct lista {
@@ -51,7 +51,7 @@ void imprimeMao(MAO_T *mao[]) {
         if (mao[i] != NULL)
             printf("[%d %d] ", mao[i]->valor, mao[i]->naipe);
         else
-            printf("[   ] ");  
+            printf("[   ] ");
     }
     printf("\n");
 }
@@ -63,7 +63,6 @@ LISTA_T *criaPesca(int baralho[][2]) {
         MAO_T *novaCarta = (MAO_T *)malloc(sizeof(MAO_T));
         novaCarta->valor = baralho[i][VALOR];
         novaCarta->naipe = baralho[i][NAIPE];
-        novaCarta->prox = NULL;
         adicionaCarta(&pesca, novaCarta);
     }
     return pesca;
@@ -95,13 +94,25 @@ void exibeEstadoDoJogo(MAO_T *maoJogo[], LISTA_T *descarte, MAO_T *maos[5][CARTA
 //Realizar uma jogada
 void realizaJogada(MAO_T *maoJogo[], LISTA_T **descarte, MAO_T *maos[5][CARTAS_POR_MAO], LISTA_T **pesca) {
     int escolhaCarta, escolhaMao;
-    
-    printf("Escolha uma carta da mao (0 a 4): ");
-    scanf("%d", &escolhaCarta);
-    
-    printf("Escolha uma mao (1 a 5) ou descarte (0): ");
-    scanf("%d", &escolhaMao);
 
+    do {
+        printf("Escolha uma carta da mao (0 a 4): ");
+        scanf("%d", &escolhaCarta);
+        if (escolhaCarta < 0 || escolhaCarta >= CARTAS_POR_MAO) {
+            printf("Erro: Escolha invalida! Por favor, insira um numero entre 0 e 4.\n");
+        }
+    } while (escolhaCarta < 0 || escolhaCarta >= CARTAS_POR_MAO);
+
+    // Verificação de entrada para escolha da mão ou descarte
+    do {
+        printf("Escolha uma mao (1 a 5) ou descarte (0): ");
+        scanf("%d", &escolhaMao);
+        if (escolhaMao < 0 || escolhaMao > 5) {
+            printf("Erro: Escolha invalida! Por favor, insira um numero entre 0 e 5.\n");
+        }
+    } while (escolhaMao < 0 || escolhaMao > 5);
+
+    // Adiciona a carta ao descarte ou a uma das mãos
     if (escolhaMao == 0) {
         adicionaCarta(descarte, maoJogo[escolhaCarta]);
     } else {
@@ -125,22 +136,42 @@ void realizaJogada(MAO_T *maoJogo[], LISTA_T **descarte, MAO_T *maos[5][CARTAS_P
 int verificaFim(MAO_T *maos[5][CARTAS_POR_MAO]) {
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < CARTAS_POR_MAO; j++) {
-            if (maos[i][j] == NULL) return 0;
+            if (maos[i][j] == NULL) {
+                return 0; 
+            }
         }
     }
-    return 1;
+    return 1; 
+}
+
+// Função para ordenar a mão em ordem ascendente pelo valor da carta
+void ordenaMao(MAO_T *mao[]) {
+    for (int i = 0; i < CARTAS_POR_MAO - 1; i++) {
+        for (int j = i + 1; j < CARTAS_POR_MAO; j++) {
+            if (mao[i] != NULL && mao[j] != NULL && mao[i]->valor > mao[j]->valor) {
+                MAO_T *temp = mao[i];
+                mao[i] = mao[j];
+                mao[j] = temp;
+            }
+        }
+    }
 }
 
 // Calcula os pontos finais do jogador
 int calculaPontuacao(MAO_T *maos[5][CARTAS_POR_MAO]) {
     int pontuacaoFinal = 0;
     for (int i = 0; i < 5; i++) {
+        // Ordena a mão antes de encadear as cartas
+        ordenaMao(&maos[i][0]);
+
         MAO_T *mao = maos[i][0];
         for (int j = 1; j < CARTAS_POR_MAO; j++) {
             mao->prox = maos[i][j];
             mao = mao->prox;
         }
+
         pontuacaoFinal += contaPontos(maos[i][0]);
+         printf("Pontuação final: %d\n", pontuacaoFinal);
     }
     return pontuacaoFinal;
 }
@@ -161,16 +192,16 @@ void jogar(){
     
     iniciaJogo(baralho, &pesca, maoJogo);
 
-    while (!verificaFim(maos)) {
+    while (verificaFim(maos) == 0) {
         exibeEstadoDoJogo(maoJogo, descarte, maos);
 
         realizaJogada(maoJogo, &descarte, maos, &pesca);
     }
-
     int pontuacao = calculaPontuacao(maos);
     printf("Pontuação final: %d\n", pontuacao);
 }
 
 int main() {
     jogar();
+    
 }
