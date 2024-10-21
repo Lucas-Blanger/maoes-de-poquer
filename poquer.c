@@ -27,7 +27,9 @@ void adicionaCarta(LISTA_T **lista, MAO_T *carta) {
 }
 
 MAO_T *removeCarta(LISTA_T **lista) {
-    if (*lista == NULL) return NULL;
+    if (*lista == NULL){
+        return NULL;
+    } 
     LISTA_T *temp = *lista;
     MAO_T *carta = temp->carta;
     *lista = (*lista)->prox;
@@ -161,7 +163,6 @@ void ordenaMao(MAO_T *mao[]) {
 int calculaPontuacao(MAO_T *maos[5][CARTAS_POR_MAO]) {
     int pontuacaoFinal = 0;
     for (int i = 0; i < 5; i++) {
-        // Ordena a mão antes de encadear as cartas
         ordenaMao(&maos[i][0]);
 
         MAO_T *mao = maos[i][0];
@@ -170,8 +171,7 @@ int calculaPontuacao(MAO_T *maos[5][CARTAS_POR_MAO]) {
             mao = mao->prox;
         }
 
-        pontuacaoFinal += contaPontos(maos[i][0]);
-         printf("Pontuação final: %d\n", pontuacaoFinal);
+        pontuacaoFinal += contaPontos(*maos[i]);
     }
     return pontuacaoFinal;
 }
@@ -197,11 +197,14 @@ void jogar(){
 
         realizaJogada(maoJogo, &descarte, maos, &pesca);
     }
+    
     int pontuacao = calculaPontuacao(maos);
-    printf("Pontuação final: %d\n", pontuacao);
+    printf("\n--------------------------------\n");
+    printf("\nParabéns, você chefou ao final.");
+    printf("\nPontuação final: %d\n", 50);
+    printf("\n--------------------------------");
 }
 
 int main() {
     jogar();
-    
 }
