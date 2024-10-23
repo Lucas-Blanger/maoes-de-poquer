@@ -1,3 +1,10 @@
+/*
+Nome: Lucas Blanger
+Disciplina: Estrutura de Dados
+Ciência da Computação
+Trabalho 1 - Mãos de Pôquer
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "maosPoquer.h"
