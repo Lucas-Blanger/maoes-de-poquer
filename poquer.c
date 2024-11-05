@@ -2,6 +2,7 @@
 Nome: Lucas Blanger
 Disciplina: Estrutura de Dados
 Ciência da Computação
+Universidade Federal de Santa Maria
 Trabalho 1 - Mãos de Pôquer
 */
 
