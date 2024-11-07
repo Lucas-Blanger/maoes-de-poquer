@@ -1,59 +1,58 @@
-# Mãos de Pôquer
+# Poker Hands
 
-**Disciplina:** Estrutura de Dados  
-**Aluno:** Lucas Blanger  
-**Universidade:** Universidade Federal de Santa Maria  
+**Course:** Data Structures  
+**Student:** Lucas Blanger  
+**University:** Federal University of Santa Maria  
 
-Este projeto é um jogo de "Mãos de Pôquer" desenvolvido em C, parte de um trabalho para a disciplina de Estrutura de Dados. No jogo, o jogador deve construir cinco mãos de pôquer a partir de cartas retiradas de um baralho embaralhado. A pontuação final é calculada com base nas mãos formadas.
+This project is a "Poker Hands" game developed in C, created as part of an assignment for the Data Structures course. In this game, the player must build five poker hands from cards drawn from a shuffled deck. The final score is calculated based on the hands formed.
 
-## Funcionalidades
+## Features
 
-- **Embaralhamento do baralho:** O baralho é embaralhado usando uma semente para garantir aleatoriedade.
-- **Manipulação de pilha de descarte e pesca:** As cartas descartadas são armazenadas em uma pilha de descarte e podem ser reutilizadas quando a pilha de pesca estiver vazia.
-- **Formação de Mãos de Pôquer:** O jogador pode organizar suas cartas para formar até cinco mãos de pôquer, pontuando de acordo com uma tabela de pontuação.
-- **Pontuação final:** A pontuação é calculada com base nas combinações de cartas em cada mão.
+- **Deck Shuffling:** The deck is shuffled using a seed to ensure randomness.
+- **Discard and Draw Pile Management:** Discarded cards are stored in a discard pile and can be reused when the draw pile is empty.
+- **Poker Hand Formation:** The player can arrange their cards to form up to five poker hands, scoring points according to a scoring table.
+- **Final Score:** The score is calculated based on the card combinations in each hand.
 
-## Estrutura do Código
+## Code Structure
 
-- **Estruturas de Dados:**  
-  - `LISTA_T`: Lista encadeada para armazenar as cartas da pilha de descarte e da mão.
-  - `MAO_T`: Estrutura para representar cada carta.
+- **Data Structures:**  
+  - `LISTA_T`: Linked list to store cards in the discard pile and the player’s hand.
+  - `MAO_T`: Structure to represent each card.
 
-- **Funções principais:**
-  - `criaPesca`: Cria a lista de cartas a serem pescadas.
-  - `iniciaJogo`: Inicia o jogo distribuindo as cartas iniciais.
-  - `realizaJogada`: Realiza uma jogada, onde o jogador pode descartar ou adicionar uma carta a uma das mãos.
-  - `verificaFim`: Verifica se todas as mãos estão completas.
-  - `calculaPontuacao`: Calcula a pontuação final com base nas combinações de cada mão.
-  - `jogar`: Função principal que controla o laço do jogo.
+- **Main Functions:**
+  - `criaPesca`: Creates the list of cards to be drawn.
+  - `iniciaJogo`: Starts the game by distributing the initial cards.
+  - `realizaJogada`: Executes a move, where the player can discard or add a card to one of their hands.
+  - `verificaFim`: Checks if all hands are complete.
+  - `calculaPontuacao`: Calculates the final score based on the combinations in each hand.
+  - `jogar`: Main function that controls the game loop.
 
-## Como Executar
+## How to Run
 
-1. Clone o repositório:
+1. Clone the repository:
    ```bash
-   git clone https://github.com/seu-usuario/maos-de-poquer.git
+   git clone https://github.com/Lucas-Blanger/maoes-de-poquer.git
+Compile the code:
 
-Compile o código:
+gcc -o maosDePoquer maosDePoquer.c -lm
 
-gcc -o maosDePoquer maosPoquer.c -lm
-
-Execute o jogo:
+Run the game:
 
     ./maosDePoquer
 
-## Instruções do Jogo
+## Game Instructions
 
-  - Inicialize o Jogo: Ao iniciar, você deve fornecer uma semente para o embaralhamento do baralho.
-  - Realize Jogadas: Escolha cartas para adicionar a uma das cinco mãos ou para descartar.
-  - Complete as Mãos: Quando todas as mãos estiverem completas, o jogo termina.
-  - Pontuação Final: A pontuação é exibida ao final do jogo.
+  - Initialize the Game: At the start, you need to provide a seed for shuffling the deck.
+  - Make Moves: Choose cards to add to one of the five hands or to discard.
+  - Complete the Hands: When all hands are complete, the game ends.
+  - Final Score: The score is displayed at the end of the game.
 
-## Requisitos
+## Requirements
 
-  - Compilador C (como GCC)
-  - Biblioteca maosPoquer.h (inclui definições adicionais e funções para embaralhar o baralho e pontuar mãos)
+  - C Compiler (like GCC)
+  - pokerHands.h header file (includes additional definitions and functions to shuffle the deck and score hands)
 
-## Estrutura de Pastas
+## Folder Structure
 
-  - maosPoquer.h: Cabeçalho contendo as definições de estruturas e funções auxiliares.
-  - maosPoquer.c: Código fonte principal com a lógica do jogo.
+   - maosPoquer.h: Header containing structure definitions and auxiliary functions.
+   - maosPoquer.c: Main source code file with game logic.
